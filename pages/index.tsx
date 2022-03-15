@@ -1,85 +1,91 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Layout from '@components/Layout'
+
+const Item = ({ label, bg }) => {
+  return(
+    <div className="flex py-2 items-center">
+      <div className={`h-6 w-6 rounded-full mr-2 ${bg}`}/>
+      <span className="text-sm">{label}</span>
+    </div>
+  )
+}
 
 const Home: NextPage = () => {
+
+  const scale =['0', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <Layout>
+      <div
+        className={'grid grid-cols-5 gap-4 w-full'}
+      >
+        <div>
+          <h5 className="text-xl font-bold mb-4">Gray</h5>
+          <Item label={`gray 0`} bg={'bg-gray-0'}/>
+          <Item label={`gray 100`} bg={'bg-gray-100'}/>
+          <Item label={`gray 200`} bg={'bg-gray-200'}/>
+          <Item label={`gray 300`} bg={'bg-gray-300'}/>
+          <Item label={`gray 400`} bg={'bg-gray-400'}/>
+          <Item label={`gray 500`} bg={'bg-gray-500'}/>
+          <Item label={`gray 600`} bg={'bg-gray-600'}/>
+          <Item label={`gray 700`} bg={'bg-gray-700'}/>
+          <Item label={`gray 800`} bg={'bg-gray-800'}/>
+          <Item label={`gray 900`} bg={'bg-gray-900'}/>
         </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
+        <div>
+          <h5 className="text-xl font-bold mb-4">Primary</h5>
+          <Item label={`primary 0`} bg={'bg-primary-0'}/>
+          <Item label={`primary 100`} bg={'bg-primary-100'}/>
+          <Item label={`primary 200`} bg={'bg-primary-200'}/>
+          <Item label={`primary 300`} bg={'bg-primary-300'}/>
+          <Item label={`primary 400`} bg={'bg-primary-400'}/>
+          <Item label={`primary 500`} bg={'bg-primary-500'}/>
+          <Item label={`primary 600`} bg={'bg-primary-600'}/>
+          <Item label={`primary 700`} bg={'bg-primary-700'}/>
+          <Item label={`primary 800`} bg={'bg-primary-800'}/>
+          <Item label={`primary 900`} bg={'bg-primary-900'}/>
+        </div>
+        <div>
+          <h5 className="text-xl font-bold mb-4">Success</h5>
+          <Item label={`success 0`} bg={'bg-success-0'}/>
+          <Item label={`success 100`} bg={'bg-success-100'}/>
+          <Item label={`success 200`} bg={'bg-success-200'}/>
+          <Item label={`success 300`} bg={'bg-success-300'}/>
+          <Item label={`success 400`} bg={'bg-success-400'}/>
+          <Item label={`success 500`} bg={'bg-success-500'}/>
+          <Item label={`success 600`} bg={'bg-success-600'}/>
+          <Item label={`success 700`} bg={'bg-success-700'}/>
+          <Item label={`success 800`} bg={'bg-success-800'}/>
+          <Item label={`success 900`} bg={'bg-success-900'}/>
+        </div>
+        <div>
+          <h5 className="text-xl font-bold mb-4">Warning</h5>
+          <Item label={`warning 0`} bg={'bg-warning-0'}/>
+          <Item label={`warning 100`} bg={'bg-warning-100'}/>
+          <Item label={`warning 200`} bg={'bg-warning-200'}/>
+          <Item label={`warning 300`} bg={'bg-warning-300'}/>
+          <Item label={`warning 400`} bg={'bg-warning-400'}/>
+          <Item label={`warning 500`} bg={'bg-warning-500'}/>
+          <Item label={`warning 600`} bg={'bg-warning-600'}/>
+          <Item label={`warning 700`} bg={'bg-warning-700'}/>
+          <Item label={`warning 800`} bg={'bg-warning-800'}/>
+          <Item label={`warning 900`} bg={'bg-warning-900'}/>
+        </div>
+        <div>
+          <h5 className="text-xl font-bold mb-4">Info</h5>
+          <Item label={`info 0`} bg={'bg-info-0'}/>
+          <Item label={`info 100`} bg={'bg-info-100'}/>
+          <Item label={`info 200`} bg={'bg-info-200'}/>
+          <Item label={`info 300`} bg={'bg-info-300'}/>
+          <Item label={`info 400`} bg={'bg-info-400'}/>
+          <Item label={`info 500`} bg={'bg-info-500'}/>
+          <Item label={`info 600`} bg={'bg-info-600'}/>
+          <Item label={`info 700`} bg={'bg-info-700'}/>
+          <Item label={`info 800`} bg={'bg-info-800'}/>
+          <Item label={`info 900`} bg={'bg-info-900'}/>
+        </div>
+      </div>
+    </Layout>
   )
 }
 
