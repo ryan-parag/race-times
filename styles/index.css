@@ -4,4 +4,8 @@
   .tag {
     @apply rounded-full inline-flex items-center font-bold py-0.5
   }
+
+  .select {
+    @apply appearance-none inline-flex px-4 py-0.5 rounded-full ease-in-out m-0 items-center border border-gray-200 dark:border-gray-500 bg-transparent cursor-pointer hover:bg-gray-0 hover:dark:bg-gray-800
+  }
 }

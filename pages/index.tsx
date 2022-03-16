@@ -16,6 +16,12 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
+      <div className="p-4">
+        <select className="tag py-0.5 px-3 select" placeholder="Select...">
+          <option selected value="2022">2022</option>
+          <option value="2021">2021</option>
+        </select>
+      </div>
       <div
         className={'grid grid-cols-5 gap-4 w-full'}
       >
