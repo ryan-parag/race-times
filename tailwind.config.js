@@ -4,6 +4,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Switzer-Variable', 'sans-serif'],
+    },
     extend: {
       colors: {
         "mono-white": {
