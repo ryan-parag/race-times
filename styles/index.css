@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .tag {
+    @apply rounded-full inline-flex items-center font-bold py-0.5
+  }
+}
