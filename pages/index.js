@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Layout from '@components/Layout'
 
 const Item = ({ label, bg }) => {
@@ -10,7 +9,7 @@ const Item = ({ label, bg }) => {
   )
 }
 
-const Home: NextPage = () => {
+const Home = () => {
 
   const scale =['0', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 

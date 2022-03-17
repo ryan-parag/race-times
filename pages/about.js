@@ -1,8 +1,7 @@
-import type { NextPage } from 'next'
 import Layout from '@components/Layout'
 import Tag from '@components/Tag'
 
-const Page: NextPage = () => {
+const Page = () => {
 
   return (
     <Layout>
