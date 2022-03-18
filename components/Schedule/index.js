@@ -18,7 +18,6 @@ const Schedule = () => {
   const fetchRaces = (event) => {
     const value = event.target.value
     setSeason(value)
-    console.log(data)
   }
 
   const { data, error } = useSWR(`/api/races/${season}`, fetcher)

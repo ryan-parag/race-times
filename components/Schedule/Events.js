@@ -1,6 +1,7 @@
 import React from 'react'
 import { Empty } from '@components/DataStates'
 import Event from '@components/Schedule/Event'
+import { motion } from 'framer-motion'
 
 const Events = ({ data, filter, season }) => {
 
@@ -24,7 +25,14 @@ const Events = ({ data, filter, season }) => {
       {
         filtered.length > 0 ? (
           filtered.map((item,i ) => (
-            <Event key={item.race} event={item}/>
+            <motion.div
+              className="opacity-0 top-4 relative"
+              animate={{ opacity: 1, top: 0 }}
+              transition={{ duration: 0.3, delay: 0.1*i }}
+              key={i}
+            >
+              <Event key={item.race} event={item}/>
+            </motion.div>
           ))
         )
         :
