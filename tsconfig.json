@@ -16,9 +16,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "pages/_app.js", "pages/about.js", "pages/index.js", "pages/schedule.js", "pages/standings.js"],
   "exclude": ["node_modules"]
 }

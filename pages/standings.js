@@ -4,7 +4,7 @@ const Page = () => {
 
   return (
     <Layout>
-      Standings
+      
     </Layout>
   )
 }
