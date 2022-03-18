@@ -2,10 +2,10 @@ import React from 'react'
 import Tag from '@components/Tag'
 import moment from 'moment'
 
-export const CalendarItem = ({day, num, month, year}) => {
+export const CalendarItem = ({day, num, month, year, completed}) => {
   return(
     <div className="relative z-10 rounded-lg text-center bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-600 overflow-hidden flex flex-col w-full">
-      <div className="text-xs font-bold py-1 bg-primary-500 uppercase text-white tracking-widest">{month}</div>
+      <div className={`text-xs font-bold py-1 ${completed ? 'bg-gray-200 dark:bg-gray-600 text-mono-black-60 dark:text-mono-white-60' : 'bg-primary-500 text-white'} uppercase tracking-widest`}>{month}</div>
       <div className="text-3xl text-black dark:text-white py-1 font-bold font-mono">{num}</div>
       <div className="text-xs pb-1 text-mono-black-60 dark:text-mono-white-60">{day}</div>
     </div>
@@ -50,6 +50,7 @@ const Event = ({ event }) => {
           num={formatDate(event.date).numString}
           month={formatDate(event.date).monthString}
           year={formatDate(event.date).yearString}
+          completed={event.completed}
         />
       </div>
       {
