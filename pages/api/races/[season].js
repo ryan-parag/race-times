@@ -23,7 +23,7 @@ export default async (req,res) => {
       track: item.Circuit.circuitName,
       race: item.round,
       date: item.date,
-      time: item.time,
+      time: `${item.date}T${item.time}`,
       country: item.Circuit.Location.country,
       city: item.Circuit.Location.locality,
       id: item.Circuit.circuitId,

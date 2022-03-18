@@ -10,7 +10,7 @@ const Header = () => {
   const [open, setOpen] = useState(false)
 
   return(
-    <div className="fixed border-b border-gray-100 dark:border-gray-700 w-full bg-white dark:bg-gray-900 z-10">
+    <div className="fixed border-b border-gray-100 dark:border-gray-700 w-full bg-white dark:bg-gray-900 z-50">
       <div className="px-6 py-4 flex">
         <div className={'w-full flex justify-start'}>
           <Link href={'/'}>
