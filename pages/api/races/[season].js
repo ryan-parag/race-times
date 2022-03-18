@@ -12,7 +12,8 @@ export default async (req,res) => {
 
   const races = {
     season: data.season,
-    races: []
+    races: [],
+    completed: null
   }
 
   const today = new Date();
@@ -31,6 +32,12 @@ export default async (req,res) => {
     }
     races.races.push(race)
   })
+
+  const countCompleted = races.races.filter(item => {
+    return item.completed
+  })
+
+  races.completed = countCompleted.length === races.races.length ? true : false
 
   res.status(200).json({ races });
 }
