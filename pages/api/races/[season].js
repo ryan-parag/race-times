@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export default async (req,res) => {
 
   const {
@@ -13,6 +15,8 @@ export default async (req,res) => {
     races: []
   }
 
+  const today = new Date();
+
   data.Races.map(item => {
     const race = {
       name: item.raceName,
@@ -22,7 +26,8 @@ export default async (req,res) => {
       time: item.time,
       country: item.Circuit.Location.country,
       city: item.Circuit.Location.locality,
-      id: item.Circuit.circuitId
+      id: item.Circuit.circuitId,
+      completed: moment(item.date).isBefore(today)
     }
     races.races.push(race)
   })

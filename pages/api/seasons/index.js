@@ -4,12 +4,19 @@ export default async (req,res) => {
   const results = await response.json();
   const data = results.MRData.SeasonTable
 
-  const seasons = []
+  const seasonData = []
 
   data.Seasons.map(item => {
 
-    seasons.push(item.season)
+    const year = {
+      label: item.season,
+      value: item.season
+    }
+
+    seasonData.push(year)
   })
+
+  const seasons = seasonData.reverse()
 
   res.status(200).json({ seasons });
 }
