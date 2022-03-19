@@ -1,7 +1,6 @@
 import React from 'react'
 import Crown from '@components/Crown'
 import Flag from '@components/Flag'
-import { motion } from 'framer-motion'
 
 const TableCell = ({place, children }) => {
 

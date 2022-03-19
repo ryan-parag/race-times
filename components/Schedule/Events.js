@@ -4,6 +4,7 @@ import Event from '@components/Schedule/Event'
 import { motion } from 'framer-motion'
 import Filters from '@components/Filters'
 import { CheckCircle } from 'react-feather'
+import SeasonChecker from '@components/SeasonChecker'
 
 const Events = ({ data, season }) => {
 
@@ -36,10 +37,7 @@ const Events = ({ data, season }) => {
     <>
       {
         completed ? (
-          <div className="flex items-center py-5">
-            <span className="text-sm text-success-500 dark:text-success-200">{season} season completed</span>
-            <CheckCircle size={'16'} className="ml-1 text-success-500" />
-          </div>
+          <SeasonChecker season={season} />
         )
         :
         (
