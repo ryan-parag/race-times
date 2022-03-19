@@ -1,27 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Empty } from '@components/DataStates'
 import Event from '@components/Schedule/Event'
 import { motion } from 'framer-motion'
+import Filters from '@components/Filters'
+import { CheckCircle } from 'react-feather'
 
-const Events = ({ data, filter, season }) => {
+const Events = ({ data, season }) => {
 
-  const upcoming = data.filter((item) => !item.completed)
-  const past = data.filter((item) => item.completed)
+  const upcoming = data.races.filter((item) => !item.completed)
+  const past = data.races.filter((item) => item.completed)
+
+  const upcomingFilters = ['Upcoming', 'Completed', 'All']
+
+  const [active, setActive] = useState(data.completed ? 'Completed' : 'Upcoming')
+  const [completed, setCompleted] = useState(data.completed)
 
   const filterData = () => {
-    if(filter === 'Upcoming') {
+    if(active === 'Upcoming') {
       return upcoming
-    } else if(filter === 'Completed') {
+    } else if(active === 'Completed') {
       return past
     } else {
-      return data
+      return data.races
     }
   }
+
+  useEffect(() => {
+    setCompleted(data.completed)
+    setActive(data.completed ? 'Completed' : 'Upcoming')
+  },[season])
 
   const filtered = filterData()
 
   return(
     <>
+      {
+        completed ? (
+          <div className="flex items-center py-5">
+            <span className="text-sm text-success-500 dark:text-success-200">{season} season completed</span>
+            <CheckCircle size={'16'} className="ml-1 text-success-500" />
+          </div>
+        )
+        :
+        (
+          <Filters options={upcomingFilters} active={active} change={setActive}/>
+        )
+      }
       {
         filtered.length > 0 ? (
           filtered.map((item,i ) => (
@@ -38,7 +62,7 @@ const Events = ({ data, filter, season }) => {
         :
         (
           <Empty>
-            <span className="text-sm">There are no {filter.toLowerCase()} events for the {season} season</span>
+            <span className="text-sm">There are no {active.toLowerCase()} events for the {season} season</span>
           </Empty>
         )
       }

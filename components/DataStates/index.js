@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const Container = ({children}) => {
   return(
     <motion.div
-      className="my-4 opacity-0 flex text-center flex-col items-center px-4 py-6 rounded-md bg-gray-0 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60"
+      className="my-4 opacity-0 flex text-center flex-col items-center px-4 py-6 rounded-md bg-transparent text-mono-black-60 dark:text-mono-white-60"
       animate={{ opacity: 1 }}
       transition={{ duration: 0.24 }}
     >
