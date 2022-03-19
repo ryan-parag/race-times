@@ -25,9 +25,10 @@ export default async (req,res) => {
       dob: item.Driver.dateOfBirth,
       number: item.Driver.permanentNumber,
       country: item.Driver.nationality,
-      teamId: item.Constructors.length > 0 ? item.Constructors[0].constructorId : null,
-      team: item.Constructors.length > 0 ? item.Constructors[0].name : null,
+      teams: []
     }
+
+    item.Constructors.map(team => driver.teams.push({ name: team.name, id: team.constructorId }))
 
     standings.list.push(driver)
   })
