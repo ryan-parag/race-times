@@ -22,7 +22,7 @@ const TableCell = ({place, children }) => {
   }
 
   return(
-    <td className={`p-2 border-b text-sm md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60 ${getPlace(place)}`}>
+    <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60 ${getPlace(place)}`}>
       {children}
     </td>
   )
@@ -45,7 +45,7 @@ const Driver = ({data}) => {
       <TableCell place={data.position}>
         <div className="flex flex-col">
           <div className="flex items-center">
-            <span className="font-bold text-black dark:text-white mr-1">{data.firstName} {data.lastName}</span>
+            <span className="text-sm md:text-base font-bold text-black dark:text-white mr-1">{data.firstName} {data.lastName}</span>
             <div className="w-5">
               <Flag nation={data.country}/>
             </div>
@@ -64,7 +64,7 @@ const Driver = ({data}) => {
         </div>
       </TableCell>
       <TableCell place={data.position}>{data.wins} Win{data.wins !== 1 ? 's' : null}</TableCell>
-      <TableCell place={data.position}>{data.points} Point{data.points !== 1 ? 's' : null}</TableCell>
+      <TableCell place={data.position}>{data.points} pt{data.points !== 1 ? 's' : null}</TableCell>
     </>
   )
 }
