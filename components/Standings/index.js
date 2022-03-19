@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import TitleHeader from '@components/Schedule/TitleHeader'
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
-import Events from '@components/Schedule/Events'
 import { Loading } from '@components/DataStates'
+import TitleHeader from '@components/Standings/TitleHeader'
+import Drivers from '@components/Standings/Drivers'
 
-const Schedule = () => {
+const Standings = () => {
 
   const d = new Date()
   const year = d.getFullYear()
   const [season, setSeason] = useState(year)
 
-  const { data, error } = useSWR(`/api/races/${season}`, fetcher)
+  const { data, error } = useSWR(`/api/standings/${season}`, fetcher)
 
   const fetchRaces = (event) => {
     const value = event.target.value
@@ -27,9 +27,7 @@ const Schedule = () => {
       <TitleHeader selectSeason={fetchRaces}/>
       {
         data ? (
-          <>
-            <Events data={data.races} season={season} />
-          </>
+          <Drivers data={data.standings} />
         )
         :
         (
@@ -42,4 +40,4 @@ const Schedule = () => {
   )
 }
 
-export default Schedule
+export default Standings
