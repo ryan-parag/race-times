@@ -36,8 +36,6 @@ const SeasonChecker = ({ season }) => {
     }
   }
 
-  console.log(data)
-
   return(
     <>
       {

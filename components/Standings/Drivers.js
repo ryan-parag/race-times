@@ -7,7 +7,7 @@ const Drivers = ({ data }) => {
   return(
     <>
       <SeasonChecker season={data.season} />
-      <table className="w-full">
+      <table className="w-full rounded-md overflow-hidden">
         <tbody>
           {
             data.list.map((item, i) => (
