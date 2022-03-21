@@ -1,6 +1,8 @@
 import React from 'react'
 import Tag from '@components/Tag'
 import moment from 'moment'
+import { Check } from 'react-feather'
+import 'moment-timezone'
 
 export const CalendarItem = ({day, num, month, year, completed}) => {
   return(
@@ -35,16 +37,17 @@ const Event = ({ event }) => {
 
   const getDateTime = (time) => {
     const date = new Date(time)
-    const local = date.toLocaleString()
-    const formatted = moment(local).format('llll')
-    return formatted
+    const formatted = date.getTime()
+    const zone = moment.tz(moment.tz.guess()).zoneName()
+    const joined = `${moment(formatted).format('h:mm A')} ${zone}`
+    return joined
   }
 
   return (
     <div
-      className={`py-4 px-0 opacity-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-50' : 'opacity-100'} border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-900 flex items-start relative`}
+      className={`py-4 px-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-900 flex items-start relative`}
     >
-      <div className="pr-4 w-32">
+      <div className="pr-4 w-32 hidden md:block">
         <CalendarItem
           day={formatDate(event.date).dayString}
           num={formatDate(event.date).numString}
@@ -53,25 +56,26 @@ const Event = ({ event }) => {
           completed={event.completed}
         />
       </div>
-      {
-        event.completed && (
-          <div className="absolute top-4 right-4 rotate-12">
-            <Tag type={'success'} size={'sm'}>Completed</Tag>
-          </div>
-        )
-      }
-      <div className="block w-full">
-        {
-          event.completed ? (
-            <strike><h5 className="font-bold text-lg mb-1">{event.name}</h5></strike>
-          )
-          :
-          (
-            <h5 className="font-bold text-lg mb-1">{event.name}</h5>
-          )
-        }
-        <span className="text-sm block mb-2 text-mono-black-60 dark:text-mono-white-60">{event.track} • {event.city}</span>
-        <Tag type={'primary'} ghost size={'sm'}>{getDateTime(event.time)}</Tag>
+      <div className="flex flex-row md:flex-col justify-between w-full">
+        <div>
+          <span className="font-bold text-sm mb-2 block md:hidden">{moment(event.date).format('dddd, MMMM D, YYYY')}</span>
+          <h5 className="font-bold text-lg mb-1">{event.name}</h5>
+          <span className="text-sm block mb-2 text-mono-black-60 dark:text-mono-white-60">{event.track} • {event.city}</span>
+        </div>
+        <div>
+          {
+            event.completed ? (
+              <Tag type={'success'}>
+                Completed
+                <Check size={'16'} className="ml-1" />
+              </Tag>
+            )
+            :
+            (
+              <Tag type={'primary'} ghost>{getDateTime(event.time)}</Tag>
+            )
+          }
+        </div>
       </div>
     </div>
   )

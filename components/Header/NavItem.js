@@ -10,7 +10,7 @@ export const MobileNavItem = ({ label, route }) => {
   if(router.pathname === route) {
     return(
       <Link href={route}>
-        <a className={'px-6 py-4 w-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-100'}>
+        <a className={'px-6 py-4 w-full bg-primary-100 dark:bg-primary-800 text-primary-700 dark:text-primary-100'}>
           {label}
         </a>
       </Link>

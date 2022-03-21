@@ -1,27 +1,37 @@
 import React from 'react'
 import Crown from '@components/Crown'
 import Flag from '@components/Flag'
+import Link from 'next/link'
 
-const TableCell = ({place, children }) => {
+const PlaceCell = ({ place }) => {
 
   const getPlace = place => {
     switch(place) {
       case '1':
-        return 'bg-yellow-100 bg-opacity-50 dark:bg-yellow-900 dark:bg-opacity-40'
+        return '#FFC800'
         break;
       case '2':
-        return 'bg-gray-0 dark:bg-gray-800 dark:bg-opacity-40'
+        return '#B3BAC3'
         break;
       case '3':
-        return 'bg-warning-100 bg-opacity-30 dark:bg-warning-900 dark:bg-opacity-40'
+        return '#F3A965'
         break;
       default:
-        return 'bg-transparent'
+        return 'transparent'
     }
   }
 
   return(
-    <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60 ${getPlace(place)}`}>
+    <td className={`p-0 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
+      <div className="h-12 w-1 rounded-tr-sm rounded-br-sm" style={{ background: getPlace(place) }}/>
+    </td>
+  )
+}
+
+const TableCell = ({place, children }) => {
+
+  return(
+    <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
       {children}
     </td>
   )
@@ -30,6 +40,7 @@ const TableCell = ({place, children }) => {
 const Driver = ({data}) => {
   return(
     <>
+      <PlaceCell place={data.position}/>
       <TableCell place={data.position}>
         {
           data.position === '1' || data.position === '2' || data.position === '3' ? (
@@ -44,7 +55,9 @@ const Driver = ({data}) => {
       <TableCell place={data.position}>
         <div className="flex flex-col">
           <div className="flex items-center">
-            <span className="text-sm md:text-base font-bold text-black dark:text-white mr-1">{data.firstName} {data.lastName}</span>
+            <Link href={`/drivers/${data.id}`}>
+              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 hover:underline">{data.firstName} {data.lastName}</a>
+            </Link>
             <div className="w-5">
               <Flag nation={data.country}/>
             </div>
@@ -57,13 +70,15 @@ const Driver = ({data}) => {
                     <span className="text-xs mr-1">{team.name}</span>
                   ))
                 }
+                <span className="text-xs mr-1">•</span>
+                <span className="text-xs">#{data.number}</span>
               </div>
             )
           }
         </div>
       </TableCell>
-      <TableCell place={data.position}>{data.wins} Win{data.wins !== 1 ? 's' : null}</TableCell>
-      <TableCell place={data.position}>{data.points} pt{data.points !== 1 ? 's' : null}</TableCell>
+      <TableCell place={data.position}>{data.wins}</TableCell>
+      <TableCell place={data.position}>{data.points}</TableCell>
     </>
   )
 }
