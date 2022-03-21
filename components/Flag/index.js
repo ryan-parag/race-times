@@ -55,6 +55,12 @@ const Flag = ({ nation }) => {
       case 'Chinese':
         return 'china.svg'
         break;
+      case 'American':
+        return 'america.svg'
+        break;
+      case 'Indian':
+        return 'india.svg'
+        break;
       default:
         return 'default.svg'
     }

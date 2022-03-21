@@ -37,7 +37,7 @@ const TableCell = ({place, children }) => {
   )
 }
 
-const Driver = ({data}) => {
+const Team = ({data}) => {
   return(
     <>
       <PlaceCell place={data.position}/>
@@ -55,26 +55,20 @@ const Driver = ({data}) => {
       <TableCell place={data.position}>
         <div className="flex flex-col">
           <div className="flex items-center">
-            <Link href={`/drivers/${data.id}`}>
-              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 hover:underline">{data.firstName} {data.lastName}</a>
+            <Link href={`/teams/${data.id}`}>
+              <a className="inline-flex items-center text-sm md:text-base font-bold text-black dark:text-white mr-1 hover:underline">
+                <img
+                  className="w-8 h-8 p-1 rounded-full bg-white overflow-hidden mr-2"
+                  src={`/static/teams/${data.id}.png`}
+                  onError={(e) => (e.currentTarget.src = '/static/teams/default.png')}
+                />
+                {data.name}
+              </a>
             </Link>
             <div className="w-5">
               <Flag nation={data.country}/>
             </div>
           </div>
-          {
-            data.teams.length > 0 && (
-              <div className="flex items-center">
-                {
-                  data.teams.map(team => (
-                    <span key={team.name} className="text-xs mr-1">{team.name}</span>
-                  ))
-                }
-                <span className="text-xs mr-1">•</span>
-                <span className="text-xs">#{data.number}</span>
-              </div>
-            )
-          }
         </div>
       </TableCell>
       <TableCell place={data.position}>{data.wins}</TableCell>
@@ -83,4 +77,4 @@ const Driver = ({data}) => {
   )
 }
 
-export default Driver
+export default Team
