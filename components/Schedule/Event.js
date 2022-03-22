@@ -1,7 +1,7 @@
 import React from 'react'
 import Tag from '@components/Tag'
 import moment from 'moment'
-import { Check } from 'react-feather'
+import { Check, Flag, MapPin } from 'react-feather'
 import 'moment-timezone'
 
 export const CalendarItem = ({day, num, month, year, completed}) => {
@@ -57,10 +57,14 @@ const Event = ({ event }) => {
         />
       </div>
       <div className="flex flex-row md:flex-col justify-between w-full">
-        <div>
+        <div className="w-full flex-1">
           <span className="font-bold text-sm mb-2 block md:hidden">{moment(event.date).format('dddd, MMMM D, YYYY')}</span>
           <h5 className="font-bold text-lg mb-1">{event.name}</h5>
-          <span className="text-sm block mb-2 text-mono-black-60 dark:text-mono-white-60">{event.track} • {event.city}</span>
+          <span className="text-sm flex flex-col md:block mb-2 text-mono-black-60 dark:text-mono-white-60">
+            <span className="inline-flex items-center"><Flag size={'12'} className="md:hidden mr-1"/>{event.track}</span>
+            <span className="mx-1 hidden md:inline-block">•</span>
+            <span className="inline-flex items-center"><MapPin size={'12'} className="md:hidden mr-1"/>{event.city}</span>
+          </span>
         </div>
         <div>
           {
