@@ -56,7 +56,7 @@ const Driver = ({data}) => {
         <div className="flex flex-col">
           <div className="flex items-center">
             <Link href={`/drivers/${data.id}`}>
-              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 hover:underline">{data.firstName} {data.lastName}</a>
+              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 link">{data.firstName} {data.lastName}</a>
             </Link>
             <div className="w-5">
               <Flag nation={data.country}/>
@@ -67,7 +67,9 @@ const Driver = ({data}) => {
               <div className="flex items-center">
                 {
                   data.teams.map(team => (
-                    <span key={team.name} className="text-xs mr-1">{team.name}</span>
+                    <Link href={`/teams/${team.id}`}>
+                      <a className="text-xs mr-1 link">{team.name}</a>
+                    </Link>
                   ))
                 }
                 <span className="text-xs mr-1">•</span>

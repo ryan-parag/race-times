@@ -17,12 +17,25 @@ export default async (req,res) => {
 
   const obj = activeData.ConstructorStandings.find(activeData => activeData.Constructor.constructorId === data.constructorId);
 
+  const driverResponse = await fetch(`https://ergast.com/api/f1/${year}/driverStandings.json`);
+  const driverStandings = await driverResponse.json();
+  const driverData = driverStandings.MRData.StandingsTable.StandingsLists[0]
+  
   const constructor = {
     id: data.constructorId,
     name: data.name,
     country: data.nationality,
-    active: obj ? obj : false
+    active: obj ? obj : false,
+    drivers: []
   }
+
+  driverData.DriverStandings.map(driver => {
+    driver.Constructors.map(team => {
+      if(team.constructorId === constructor.id) {
+        constructor.drivers.push({ id: driver.Driver.driverId, firstName: driver.Driver.givenName, lastName: driver.Driver.familyName })
+      }
+    })
+  })
 
   res.status(200).json({ constructor });
 }

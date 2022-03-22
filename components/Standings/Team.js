@@ -56,7 +56,7 @@ const Team = ({data}) => {
         <div className="flex flex-col">
           <div className="flex items-center">
             <Link href={`/teams/${data.id}`}>
-              <a className="inline-flex items-center text-sm md:text-base font-bold text-black dark:text-white mr-1 hover:underline">
+              <a className="inline-flex items-center text-sm md:text-base font-bold text-black dark:text-white mr-1 link">
                 <img
                   className="w-8 h-8 p-1 rounded-full bg-white overflow-hidden mr-2"
                   src={`/static/teams/${data.id}.png`}
