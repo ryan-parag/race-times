@@ -10,7 +10,7 @@ import { Loading } from '@components/DataStates'
 const ListItem = ({border, label, children}) => {
   return(
     <div className={`flex items-center justify-between py-2 px-4 ${border && 'border-b border-gray-100 dark:border-gray-600'}`}>
-      <span className="text-xs md:text-base mb-1 md:mb-0">{label}</span>
+      <span className="text-xs md:text-base">{label}</span>
       <div className="font-bold text-sm md:text-base">{children}</div>
     </div>
   )
