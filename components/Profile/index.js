@@ -10,8 +10,8 @@ import { Loading } from '@components/DataStates'
 const ListItem = ({border, label, children}) => {
   return(
     <div className={`flex items-center justify-between py-2 px-4 ${border && 'border-b border-gray-100 dark:border-gray-600'}`}>
-      <span>{label}</span>
-      <div className="font-bold">{children}</div>
+      <span className="text-xs md:text-base mb-1 md:mb-0">{label}</span>
+      <div className="font-bold text-sm md:text-base">{children}</div>
     </div>
   )
 }
@@ -145,10 +145,10 @@ export const Team = ({id}) => {
                         data.constructor.drivers.map((driver, i) => (
                           <span>
                             <Link key={driver.id} href={`/drivers/${driver.id}`}>
-                              <a className="ml-1 link">{driver.firstName} {driver.lastName}</a>
+                              <a className="link">{driver.firstName} {driver.lastName}</a>
                             </Link>
                             {
-                              i !== data.constructor.drivers.length - 1 && (<span>,</span>)
+                              i !== data.constructor.drivers.length - 1 && (<span className="mx-1">,</span>)
                             }
                           </span>
                         ))
