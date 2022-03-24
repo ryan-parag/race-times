@@ -45,7 +45,7 @@ const Event = ({ event }) => {
 
   return (
     <div
-      className={`py-4 px-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-900 flex items-start relative`}
+      className={`py-4 px-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-gray-100 bg-transparent md:bg-white dark:md:bg-gray-900 dark:border-gray-700 md:bg-opacity-60 dark:md:bg-opacity-60 backdrop-blur flex items-start relative`}
     >
       <div className="pr-4 w-32 hidden md:block">
         <CalendarItem
