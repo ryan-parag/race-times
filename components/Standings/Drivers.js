@@ -3,7 +3,7 @@ import Driver from '@components/Standings/Driver'
 import { motion } from 'framer-motion'
 import SeasonChecker from '@components/SeasonChecker'
 
-const TableHeader = ({children}) => {
+export const TableHeader = ({children}) => {
   return(
     <th className="text-xs py-1 px-2 text-left font-normal uppercase text-mono-black-60 dark:text-mono-white-60">
       {children}

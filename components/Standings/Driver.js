@@ -3,7 +3,7 @@ import Crown from '@components/Crown'
 import Flag from '@components/Flag'
 import Link from 'next/link'
 
-const PlaceCell = ({ place }) => {
+export const PlaceCell = ({ place }) => {
 
   const getPlace = place => {
     switch(place) {
@@ -28,7 +28,7 @@ const PlaceCell = ({ place }) => {
   )
 }
 
-const TableCell = ({place, children }) => {
+export const TableCell = ({place, children }) => {
 
   return(
     <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
