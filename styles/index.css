@@ -10,6 +10,6 @@
   }
 
   .link {
-    @apply hover:underline focus:underline
+    @apply underline hover:dark:text-primary-200 focus:dark:text-primary-200 hover:text-primary-600 focus:text-primary-600 transition
   }
 }
