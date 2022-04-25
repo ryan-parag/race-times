@@ -7,7 +7,7 @@ import Filters from '@components/Filters'
 import Tag from '@components/Tag'
 import moment from 'moment'
 import 'moment-timezone'
-import { Check, MapPin } from 'react-feather'
+import { Check, Plus, Minus } from 'react-feather'
 import { CalendarItem } from '@components/Schedule/Event'
 import ListItem from '@components/ListItem'
 import { PlaceCell, TableCell } from '@components/Standings/Driver'
@@ -17,42 +17,82 @@ import { motion } from 'framer-motion'
 import Flag from '@components/Flag'
 
 const Driver = ({driver}) => {
+
+  const [open,setOpen] = useState(false)
+
   return(
     <>
-      <PlaceCell place={driver.position}/>
-      <TableCell place={driver.position}>
-        {
-          driver.position === '1' || driver.position === '2' || driver.position === '3' ? (
-            <Crown place={driver.position}/>
-          )
-          :
-          (
-            <div className="h-6 w-6 inline-flex items-center justify-center text-xs font-bold">{driver.position}</div>
-          )
-        }
-      </TableCell>
-      <TableCell place={driver.position}>
-        <div className="flex flex-col">
-          <div className="flex items-center">
-            <Link href={`/drivers/${driver.Driver.driverId}`}>
-              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 link">{driver.Driver.givenName} {driver.Driver.familyName}</a>
-            </Link>
-            <div className="w-5">
-              <Flag nation={driver.Driver.nationality}/>
+      <motion.tr
+        className="opacity-0"
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.12, delay: 0.05*driver.position }}
+        key={driver.position}
+      >
+        <PlaceCell place={driver.position}/>
+        <TableCell place={driver.position}>
+          {
+            driver.position === '1' || driver.position === '2' || driver.position === '3' ? (
+              <Crown place={driver.position}/>
+            )
+            :
+            (
+              <div className="h-6 w-6 inline-flex items-center justify-center text-xs font-bold">{driver.position}</div>
+            )
+          }
+        </TableCell>
+        <TableCell place={driver.position}>
+          <div className="flex flex-col">
+            <div className="flex items-center">
+              <Link href={`/drivers/${driver.Driver.driverId}`}>
+                <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 link">{driver.Driver.code}</a>
+              </Link>
+              <div className="w-5">
+                <Flag nation={driver.Driver.nationality}/>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <Link href={`/teams/${driver.Constructor.constructorId}`}>
+                <a className="text-xs mr-1 link">{driver.Constructor.name}</a>
+              </Link>
+              <span className="text-xs mr-1">•</span>
+              <span className="text-xs">#{driver.Driver.permanentNumber}</span>
             </div>
           </div>
-          <div className="flex items-center">
-            <Link href={`/teams/${driver.Constructor.constructorId}`}>
-              <a className="text-xs mr-1 link">{driver.Constructor.name}</a>
-            </Link>
-            <span className="text-xs mr-1">•</span>
-            <span className="text-xs">#{driver.Driver.permanentNumber}</span>
-          </div>
-        </div>
-      </TableCell>
-      <TableCell place={driver.position}>{driver.points}</TableCell>
-      <TableCell place={driver.position}>{driver.Time ? driver.Time.time : '-'}</TableCell>
-      <TableCell place={driver.position}>{driver.laps ? driver.laps : '-'}</TableCell>
+        </TableCell>
+        <TableCell place={driver.position}>{driver.points}</TableCell>
+        <TableCell place={driver.position}>{driver.Time ? driver.Time.time : '-'}</TableCell>
+        <TableCell place={driver.position}>
+          <button className="p-1 rounded-md" onClick={() => setOpen(!open)}>
+            { open ? <Minus size="20" /> : <Plus size="20" /> }
+          </button>
+        </TableCell>
+      </motion.tr>
+      {
+        open && (
+          <tr>
+          <td colspan="100%">
+            <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+              Driver:&nbsp;
+              <Link href={`/drivers/${driver.Driver.driverId}`}>
+                <a className="font-bold text-black dark:text-white link">
+                  {driver.Driver.givenName} {driver.Driver.familyName}
+                </a>
+              </Link>
+            </div>
+            <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+              Laps: {driver.laps ? driver.laps : '-'} ({driver.status})
+            </div>
+            {
+              driver.FastestLap && (
+                <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+                  Fastest Lap: {driver.FastestLap.Time.time} • Avg {driver.FastestLap.AverageSpeed.speed} {driver.FastestLap.AverageSpeed.units}
+                </div>
+              )
+            }
+          </td>
+        </tr>
+        )
+      }
     </>
   )
 }
@@ -133,7 +173,7 @@ const Schedule = ({race}) => {
 
 const Results = ({race}) => {
   return(
-    <table className="w-full rounded-md overflow-hidden">
+    <table className="w-full rounded-md overflow-hidden table-auto">
       <thead>
         <tr>
           <TableHeader/>
@@ -141,20 +181,13 @@ const Results = ({race}) => {
           <TableHeader>Driver</TableHeader>
           <TableHeader>Points</TableHeader>
           <TableHeader>Time</TableHeader>
-          <TableHeader>Laps</TableHeader>
+          <TableHeader/>
         </tr>
       </thead>
       <tbody>
         {
           race.results.map((item, i) => (
-            <motion.tr
-              className="opacity-0"
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.12, delay: 0.05*i }}
-              key={item.position}
-            >
-              <Driver driver={item} key={i} />
-            </motion.tr>
+            <Driver driver={item} key={i} />
           ))
         }
       </tbody>
@@ -163,15 +196,6 @@ const Results = ({race}) => {
 }
 
 const Race = ({race}) => {
-
-  const getDateTime = (time) => {
-    const date = new Date(time)
-    const formatted = date.getTime()
-    const zone = moment.tz(moment.tz.guess()).zoneName()
-    const joined = `${moment(formatted).format('h:mm A')} ${zone}`
-    return joined
-  }
-  
 
   const filters = null
 
@@ -226,7 +250,9 @@ const Race = ({race}) => {
           <span className="text-sm text-mono-black-60 dark:text-mono-white-60">{race.track} • {race.city}</span>
         </div>
       </div>
-      <Filters options={filters} active={active} change={setActive}/>
+      {
+        race.completed && <Filters options={filters} active={active} change={setActive}/>
+      }
       {getTab(active)}
     </>
   )
