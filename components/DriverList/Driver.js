@@ -66,8 +66,8 @@ const Driver = ({data}) => {
             data.teams.length > 0 && (
               <div className="flex items-center">
                 {
-                  data.teams.map(team => (
-                    <Link href={`/teams/${team.id}`}>
+                  data.teams.map((team, i) => (
+                    <Link href={`/teams/${team.id}`} key={i}>
                       <a className="text-xs mr-1 link">{team.name}</a>
                     </Link>
                   ))

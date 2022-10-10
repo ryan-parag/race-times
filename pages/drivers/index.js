@@ -1,11 +1,11 @@
 import Layout from '@components/Layout'
-import Standings from '@components/Standings'
+import DriverList from '@components/DriverList'
 
 const Page = () => {
 
   return (
     <Layout>
-      <Standings/>
+      <DriverList/>
     </Layout>
   )
 }

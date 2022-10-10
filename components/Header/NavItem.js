@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import Tag from '@components/Tag'
+import Tag, { TagLink } from '@components/Tag'
 import { useRouter } from 'next/router'
 
 export const MobileNavItem = ({ label, route }) => {
@@ -32,19 +32,17 @@ export const NavItem = ({ label, route }) => {
 
   if(router.pathname === route) {
     return(
-      <Link href={route}>
-        <a className={'pr-2 inline-flex'}>
-          <Tag>{label}</Tag>
-        </a>
-      </Link>
+      <div className="inline-flex mx-1">
+        <TagLink href={route}>
+          {label}
+        </TagLink>
+      </div>
     )
   } else {
     return(
-      <Link href={route}>
-        <a className={'pr-2 inline-flex'}>
-          <Tag ghost>{label}</Tag>
-        </a>
-      </Link>
+      <div className="inline-flex mx-1">
+        <TagLink href={route} ghost>{label}</TagLink>
+      </div>
     )
   }
 }

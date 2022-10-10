@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import TitleHeader from '@components/Schedule/TitleHeader'
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
-import Events from '@components/Schedule/Events'
 import { Loading } from '@components/DataStates'
+import Drivers from './Drivers'
 import SeasonHeader from '@components/SeasonHeader'
 
-const Schedule = () => {
+const DriverList = () => {
 
   const checkSeason = () => {
     if (typeof window !== 'undefined') {
@@ -18,12 +17,12 @@ const Schedule = () => {
   const year = d.getFullYear()
   const [season, setSeason] = useState(checkSeason() === null ? year : checkSeason())
 
-  const { data, error } = useSWR(`/api/races/${season}`, fetcher)
-
   const fetchRaces = (season) => {
     setSeason(season)
     sessionStorage.setItem("season", season);
   }
+
+  const { data, error } = useSWR(`/api/standings/drivers/${season}`, fetcher)
 
   useEffect(() => {
 
@@ -36,7 +35,7 @@ const Schedule = () => {
         {
           data ? (
             <>
-              <Events data={data.races} season={season} />
+              <Drivers data={data.standings} />
             </>
           )
           :
@@ -51,4 +50,4 @@ const Schedule = () => {
   )
 }
 
-export default Schedule
+export default DriverList

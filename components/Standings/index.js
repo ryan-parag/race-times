@@ -6,6 +6,7 @@ import TitleHeader from '@components/Standings/TitleHeader'
 import Drivers from '@components/Standings/Drivers'
 import Teams from '@components/Standings/Teams'
 import Filters from '@components/Filters'
+import SeasonHeader from '@components/SeasonHeader'
 
 const Standings = () => {
 
@@ -16,9 +17,8 @@ const Standings = () => {
   const filters = ['Drivers', 'Teams']
   const [active, setActive] = useState(filters[0])
 
-  const fetchRaces = (event) => {
-    const value = event.target.value
-    setSeason(value)
+  const fetchRaces = (season) => {
+    setSeason(season)
   }
 
   const { data, error } = useSWR(`/api/standings/${active.toLowerCase()}/${season}`, fetcher)
@@ -29,29 +29,31 @@ const Standings = () => {
 
   return(
     <>
-      <TitleHeader selectSeason={fetchRaces}/>
-      {
-        data ? (
-          <>
-            <Filters options={filters} active={active} change={setActive}/>
-            {
-              active === 'Drivers' ? (
-                <Drivers data={data.standings} />
-              )
-              :
-              (
-                <Teams data={data.standings} />
-              )
-            }
-          </>
-        )
-        :
-        (
-          <Loading>
-            <span className="text-sm">Loading...</span>
-          </Loading>
-        )
-      }
+      <SeasonHeader selectSeason={fetchRaces}/>
+      <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+        {
+          data ? (
+            <>
+              <Filters options={filters} active={active} change={setActive}/>
+              {
+                active === 'Drivers' ? (
+                  <Drivers data={data.standings} />
+                )
+                :
+                (
+                  <Teams data={data.standings} />
+                )
+              }
+            </>
+          )
+          :
+          (
+            <Loading>
+              <span className="text-sm">Loading...</span>
+            </Loading>
+          )
+        }
+      </div>
     </>
   )
 }
