@@ -7,14 +7,15 @@ import Filters from '@components/Filters'
 import Tag from '@components/Tag'
 import moment from 'moment'
 import 'moment-timezone'
-import { Check, Plus, Minus } from 'react-feather'
+import { Check, Plus, Minus, ChevronDown } from 'react-feather'
 import { CalendarItem } from '@components/Schedule/Event'
 import ListItem from '@components/ListItem'
-import { PlaceCell, TableCell } from '@components/Standings/Driver'
-import { TableHeader } from '@components/Standings/Drivers'
+import { PlaceCell, TableCell } from '@components/DriverList/Driver'
+import { TableHeader } from '@components/DriverList/Drivers'
 import Crown from '@components/Crown'
 import { motion } from 'framer-motion'
 import Flag from '@components/Flag'
+import { TabButton } from '@components/Tab'
 
 const Driver = ({driver}) => {
 
@@ -63,7 +64,7 @@ const Driver = ({driver}) => {
         <TableCell place={driver.position}>{driver.Time ? driver.Time.time : '-'}</TableCell>
         <TableCell place={driver.position}>
           <button className="p-1 rounded-md" onClick={() => setOpen(!open)}>
-            { open ? <Minus size="20" /> : <Plus size="20" /> }
+            <ChevronDown size="20" className={`transform transition ${open ? 'rotate-180' : 'rotate-0'}`} />
           </button>
         </TableCell>
       </motion.tr>
@@ -71,7 +72,7 @@ const Driver = ({driver}) => {
         open && (
           <tr>
           <td colspan="100%">
-            <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+            <div className="p-2 pl-24 md:pl-32 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60">
               Driver:&nbsp;
               <Link href={`/drivers/${driver.Driver.driverId}`}>
                 <a className="font-bold text-black dark:text-white link">
@@ -79,12 +80,12 @@ const Driver = ({driver}) => {
                 </a>
               </Link>
             </div>
-            <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+            <div className="p-2 pl-24 md:pl-32 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60">
               Laps: {driver.laps ? driver.laps : '-'} ({driver.status})
             </div>
             {
               driver.FastestLap && (
-                <div className="p-2 pl-8 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
+                <div className="p-2 pl-24 md:pl-32 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
                   Fastest Lap: {driver.FastestLap.Time.time} • Avg {driver.FastestLap.AverageSpeed.speed} {driver.FastestLap.AverageSpeed.units}
                 </div>
               )
@@ -237,23 +238,43 @@ const Race = ({race}) => {
 
   return(
     <>
-      <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
-        <Link href={'/schedule'}>
-          <a className="hover:underline">Schedule</a>
-        </Link>
-        <span className="mx-1">/</span>
-        <span className="font-bold text-black dark:text-white">{race.name}</span>
-      </div>
-      <div className="flex flex-col md:flex-row items-start justify-between mb-2 pb-4 border-b border-gray-100 dark:border-gray-600">
-        <div>
-          <h1 className="text-3xl md:text-5xl font-black">{race.name}</h1>
-          <span className="text-sm text-mono-black-60 dark:text-mono-white-60">{race.track} • {race.city}</span>
+    <div className="w-full sticky top-12 z-20 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600">
+      <div className="flex flex-col w-full px-6 py-8 w-full max-w-screen-lg mx-auto">
+        <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
+          <Link href={'/schedule'}>
+            <a className="hover:underline">Schedule</a>
+          </Link>
+          <span className="mx-1">/</span>
+          <span className="font-bold text-black dark:text-white">{race.name}</span>
+        </div>
+        <div className="flex flex-col md:flex-row items-start justify-between">
+          <div>
+            <h1 className="text-3xl md:text-5xl font-black">{race.name}</h1>
+            <span className="text-sm text-mono-black-60 dark:text-mono-white-60">{race.track} • {race.city}</span>
+          </div>
         </div>
       </div>
       {
-        race.completed && <Filters options={filters} active={active} change={setActive}/>
+        race.completed && (
+          <div className="flex max-w-screen-lg mx-auto px-6">
+            {
+              filters.map((item, i) => (
+                <TabButton
+                  key={i}
+                  onChange={setActive}
+                  active={active === item}
+                >
+                  {item}
+                </TabButton>
+              ))
+            }
+          </div>
+        )
       }
-      {getTab(active)}
+    </div>
+      <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+        {getTab(active)}
+      </div>
     </>
   )
 }

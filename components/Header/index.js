@@ -1,55 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import Link from 'next/link'
 import Logo from '@components/Logo'
 import { NavItem, MobileNavItem } from '@components/Header/NavItem'
-import { Menu, X } from 'react-feather'
 import { motion } from 'framer-motion'
+import { Listbox, Transition } from '@headlessui/react'
+import { Info, GitHub } from 'react-feather';
+import useSWR from 'swr';
+import fetcher from '@utils/fetcher';
+import Tag from '@components/Tag'
 
 const Header = () => {
 
-  const [open, setOpen] = useState(false)
+  const d = new Date()
+  const year = d.getFullYear()
+  const [season, setSeason] = useState(year)
+
+  const { data, error } = useSWR('/api/seasons', fetcher)
+
+  const fetchRaces = (season) => {
+    setSeason(season)
+  }
+
+  useEffect(() => {
+
+  },[season])
 
   return(
     <div className="fixed border-b border-gray-100 dark:border-gray-700 w-full bg-white dark:bg-gray-900 z-50">
-      <div className="px-6 py-4 flex">
-        <div className={'w-full flex justify-start'}>
+      <div className="px-6 py-4 w-full max-w-screen-lg mx-auto items-center flex">
+        <div className={'w-full flex-1 flex items-center justify-start'}>
           <Link href={'/'}>
-            <a>
+            <a className="mr-2">
               <Logo type={'primary'} />
             </a>
           </Link>
         </div>
-        <div className={'w-full justify-center hidden md:flex'}>
-          <NavItem label={'Schedule'} route={'/'}/>
-          <NavItem label={'Standings'} route={'/standings'}/>
-        </div>
-        <div className={'w-full justify-end hidden md:flex'}>
-          <NavItem label={'About'} route={'/about'}/>
-        </div>
-        <div className={'w-full justify-end flex md:hidden'}>
-          <button
-            className="border border-gray-200 dark:border-gray-500 rounded-full w-8 h-8 inline-flex items-center justify-center hover:bg-gray-0 hover:dark:bg-gray-700 transition p-0"
-            onClick={() => setOpen(!open)}
-          >
-            {
-              open ? (<X size={'20'} />) : (<Menu size={'20'} />)
-            }
-          </button>
+        <div className={'w-full items-center justify-end flex flex-1'}>
+          <Link href={'/about'}>
+            <a title={'About'} className="transition p-1 inline-flex items-center justify-center bg-white dark:bg-gray-900 hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-700 hover:scale-105 rounded-full mr-2">
+              <Info size={20}/>
+            </a>
+          </Link>
+          <a title={'Contribute'} href="https://github.com/ryan-parag/race-times" target="_blank" className="transition p-1 inline-flex items-center justify-center bg-white dark:bg-gray-900 hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-700 hover:scale-105 rounded-full">
+            <GitHub size={20}/>
+          </a>
         </div>
       </div>
-      {
-        open && (
-          <motion.div
-            className={'flex md:hidden w-full flex-col h-0 overflow-hidden bg-white dark:bg-gray-900'}
-            animate={{ height: 'auto' }}
-            transition={{ duration: 0.24, delay: 0.1 }}
-          >
-            <MobileNavItem label={'Schedule'} route={'/'}/>
-            <MobileNavItem label={'Standings'} route={'/standings'}/>
-            <MobileNavItem label={'About'} route={'/about'}/>
-          </motion.div>
-        )
-      }
     </div>
   )
 }

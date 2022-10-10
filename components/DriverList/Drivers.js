@@ -1,5 +1,5 @@
 import React from 'react'
-import Driver from '@components/Standings/Driver'
+import Driver from './Driver'
 import { motion } from 'framer-motion'
 import SeasonChecker from '@components/SeasonChecker'
 

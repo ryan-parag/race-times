@@ -1,13 +1,13 @@
 import React, { useState, Fragment } from 'react'
-import Title from '@components/Title'
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDown } from 'react-feather';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
-const SeasonPicker = ({ years, onChange }) => {
-  const [selected, setSelected] = useState(years[0])
+const SeasonPicker = ({ years, onChange, current }) => {
+  const [selected, setSelected] = useState({ label: current, value: current})
 
   const changeSeason = (season) => {
     setSelected(season)
@@ -77,12 +77,26 @@ const Tab = ({ active, children, href }) => {
   )
 }
 
-const TitleHeader = ({ selectSeason }) => {
+const SeasonHeader = ({ selectSeason, current }) => {
 
   const { data, error } = useSWR('/api/seasons', fetcher)
+  const navigation = [
+    {
+      name: 'Schedule',
+      route: '/'
+    }, {
+      name: 'Drivers',
+      route: '/drivers'
+    }, {
+      name: 'Teams',
+      route: '/teams'
+    }
+  ]
+
+  const router = useRouter()
 
   return(
-    <div className={`w-full flex bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-30 border-b border-gray-100 dark:border-gray-600`}>
+    <div className={`sticky top-12 z-20 w-full flex bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600`}>
       <div className="flex flex-col w-full mt-4 px-6 pt-8 w-full max-w-screen-lg mx-auto">
         <div className="flex items-center">
           <h1 className="text-3xl font-bold text-inherit flex items-center">
@@ -90,7 +104,7 @@ const TitleHeader = ({ selectSeason }) => {
             <span className="mx-2 font-light text-gray-400 text-2xl">/</span>
             {
               data && (
-                <SeasonPicker onChange={selectSeason} years={data.seasons} />
+                <SeasonPicker onChange={selectSeason} years={data.seasons} current={current} />
               )
             }
           </h1>
@@ -112,19 +126,21 @@ const TitleHeader = ({ selectSeason }) => {
           )
         }
         <div className="flex w-full mt-8">
-          <Tab active href={'/'}>
-            Schedule
-          </Tab>
-          <Tab href={'/standings'}>
-            Drivers
-          </Tab>
-          <Tab href={'/standings'}>
-            Teams
-          </Tab>
+          {
+            navigation.map((item, i) => (
+              <Tab
+                active={router.pathname === item.route }
+                href={item.route}
+                key={i}
+              >
+                {item.name}
+              </Tab>
+            ))
+          }
         </div>
       </div>
     </div>
   )
 }
 
-export default TitleHeader
+export default SeasonHeader

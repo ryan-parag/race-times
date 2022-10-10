@@ -3,13 +3,12 @@ import { Empty } from '@components/DataStates'
 import Event from '@components/Schedule/Event'
 import { motion } from 'framer-motion'
 import Filters from '@components/Filters'
-import { CheckCircle } from 'react-feather'
 import SeasonChecker from '@components/SeasonChecker'
 
 const Events = ({ data, season }) => {
 
   const upcoming = data.races.filter((item) => !item.completed)
-  const past = data.races.filter((item) => item.completed)
+  const past = data.races.filter((item) => item.completed).reverse()
 
   const upcomingFilters = ['Upcoming', 'Completed', 'All']
 

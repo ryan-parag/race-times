@@ -1,5 +1,5 @@
 import React from 'react'
-import Team from '@components/Standings/Team'
+import Team from './Team'
 import { motion } from 'framer-motion'
 import SeasonChecker from '@components/SeasonChecker'
 

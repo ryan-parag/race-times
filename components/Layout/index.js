@@ -17,9 +17,7 @@ const Layout = ({ children }) => {
           transition={{ duration: 2, delay: 0.3 }}
         />
       <main className="relative z-10 pt-16 flex w-full flex-col items-center">
-        <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
-          {children}
-        </div>
+        {children}
       </main>
     </>
   )
