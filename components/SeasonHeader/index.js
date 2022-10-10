@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 import { Listbox, Transition } from '@headlessui/react'
@@ -93,13 +93,37 @@ const SeasonHeader = ({ selectSeason, current }) => {
     }
   ]
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [height, setHeight] = useState(0)
+  
+  useEffect(() => {   
+    window.addEventListener("scroll", listenToScroll);
+    return () => 
+       window.removeEventListener("scroll", listenToScroll); 
+  }, [])
+  
+  const listenToScroll = () => {
+    let heightToHideFrom = 300;
+    const winScroll = document.body.scrollTop || 
+        document.documentElement.scrollTop;
+    setHeight(winScroll);
+
+    if(winScroll > (document.body.scrollHeight - 300)) {
+      setIsVisible(false);
+    } else if (winScroll > heightToHideFrom) {  
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
   const router = useRouter()
 
   return(
     <div className={`sticky top-12 z-20 w-full flex bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600`}>
-      <div className="flex flex-col w-full mt-4 px-6 pt-8 w-full max-w-screen-lg mx-auto">
+      <div className={`transition flex flex-col w-full mt-4 px-6 ${isVisible ? 'pt-4' : 'pt-8'} w-full max-w-screen-lg mx-auto`}>
         <div className="flex items-center">
-          <h1 className="text-3xl font-bold text-inherit flex items-center">
+          <h1 className={`transition font-bold text-inherit flex items-center ${isVisible ? 'text-xl' : 'text-3xl'}`}>
             <span>F1 Season</span>
             <span className="mx-2 font-light text-gray-400 text-2xl">/</span>
             {
@@ -125,7 +149,7 @@ const SeasonHeader = ({ selectSeason, current }) => {
             </>
           )
         }
-        <div className="flex w-full mt-8">
+        <div className={`transition flex w-full ${isVisible ? 'mt-4' : 'mt-8'}`}>
           {
             navigation.map((item, i) => (
               <Tab

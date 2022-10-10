@@ -1,8 +1,32 @@
 import Layout from '@components/Layout'
-import Title from '@components/Title'
 import ListItem from '@components/ListItem'
+import { ExternalLink } from 'react-feather'
 
 const Page = () => {
+
+  const tools = [
+    {
+      name: 'Figma',
+      use: 'Quick sketching',
+      link: 'https://figma.com/',
+    }, {
+      name: 'Next.js',
+      use: 'Front-end',
+      link: 'https://nextjs.org/',
+    }, {
+      name: 'Tailwind CSS',
+      use: 'Styling',
+      link: 'https://tailwindcss.com/',
+    }, {
+      name: 'Framer Motion',
+      use: 'Animation',
+      link: 'https://www.framer.com/motion/',
+    }, {
+      name: 'Ergast Developer API',
+      use: 'Data',
+      link: 'http://ergast.com/mrd/',
+    }
+  ]
 
   return (
     <Layout>
@@ -14,12 +38,20 @@ const Page = () => {
       <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
         <h4 className="font-bold my-4 text-lg">Race Times is a project to help fellow Formula 1 fans figure out the time for an upcoming grand prix in your local time.</h4>
         <p>Race Times is open-source and built using a few helpful tools:</p>
-        <ul className="my-4 rounded-md border border-gray-100 dark:border-gray-600">
-          <li><ListItem border label="Quick sketching">Figma</ListItem></li>
-          <li><ListItem border label="Front-end">Next.js</ListItem></li>
-          <li><ListItem border label="Styling">Tailwind CSS</ListItem></li>
-          <li><ListItem border label="Animation">Framer Motion</ListItem></li>
-          <li><ListItem border label="Data">Ergast Developer API</ListItem></li>
+        <ul className="my-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {
+            tools.map((item,i) => (
+              <li>
+                <a className="flex justify-between px-4 py-2 items-center rounded-md border border-gray-100 dark:border-gray-600 transition hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-800" href={item.link} target="_blank">
+                  <ExternalLink size={16}/>
+                  <div className="flex flex-col flex-1 pl-4">
+                    <strong>{item.name}</strong>
+                    <span className="text-xs lg:text-sm font-mono text-mono-black-60 dark:text-mono-white-60">{item.use}</span>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
         <p>Want to contribute?</p>
         <a className="link" href="https://github.com/ryan-parag/race-times">Contribute on GitHub</a>

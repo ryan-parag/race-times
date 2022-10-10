@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
 import fetcher from '@utils/fetcher'
@@ -7,7 +7,7 @@ import Filters from '@components/Filters'
 import Tag from '@components/Tag'
 import moment from 'moment'
 import 'moment-timezone'
-import { Check, Plus, Minus, ChevronDown } from 'react-feather'
+import { Check, ArrowLeft, ChevronDown } from 'react-feather'
 import { CalendarItem } from '@components/Schedule/Event'
 import ListItem from '@components/ListItem'
 import { PlaceCell, TableCell } from '@components/DriverList/Driver'
@@ -198,6 +198,30 @@ const Results = ({race}) => {
 
 const Race = ({race}) => {
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [height, setHeight] = useState(0)
+  
+  useEffect(() => {   
+    window.addEventListener("scroll", listenToScroll);
+    return () => 
+       window.removeEventListener("scroll", listenToScroll); 
+  }, [])
+  
+  const listenToScroll = () => {
+    let heightToHideFrom = 300;
+    const winScroll = document.body.scrollTop || 
+        document.documentElement.scrollTop;
+    setHeight(winScroll);
+
+    if(winScroll > (document.body.scrollHeight - 300)) {
+      setIsVisible(false);
+    } else if (winScroll > heightToHideFrom) {  
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
   const filters = null
 
   if(race.completed) {
@@ -239,8 +263,8 @@ const Race = ({race}) => {
   return(
     <>
     <div className="w-full sticky top-12 z-20 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600">
-      <div className="flex flex-col w-full px-6 py-8 w-full max-w-screen-lg mx-auto">
-        <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
+      <div className={`transition flex flex-col w-full px-6 ${isVisible ? 'pt-8 pb-4' : 'pt-8 pb-8'} w-full max-w-screen-lg mx-auto`}>
+        <div className={`text-sm text-mono-black-60 dark:text-mono-white-60 mb-4 ${isVisible ? 'hidden': 'block'}`}>
           <Link href={'/schedule'}>
             <a className="hover:underline">Schedule</a>
           </Link>
@@ -249,8 +273,23 @@ const Race = ({race}) => {
         </div>
         <div className="flex flex-col md:flex-row items-start justify-between">
           <div>
-            <h1 className="text-3xl md:text-5xl font-black">{race.name}</h1>
-            <span className="text-sm text-mono-black-60 dark:text-mono-white-60">{race.track} • {race.city}</span>
+            <div className="flex items-center">
+              {
+                isVisible && (
+                  <Link href={'/schedule'}>
+                    <a className="mr-2">
+                      <ArrowLeft size={24}/>
+                    </a>
+                  </Link>
+                )
+              }
+              <h1 className={`transition ${isVisible ? 'text-xl md:text-2xl' : 'text-3xl md:text-5xl'} font-black`}>{race.name}</h1>
+            </div>
+            {
+              !isVisible && (
+                <span className="text-sm text-mono-black-60 dark:text-mono-white-60">{race.track} • {race.city}</span>
+              )
+            }
           </div>
         </div>
       </div>
