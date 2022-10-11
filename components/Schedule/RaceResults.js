@@ -71,7 +71,7 @@ const Driver = ({driver}) => {
       {
         open && (
           <tr>
-          <td colspan="100%">
+          <td colSpan="100%">
             <div className="p-2 pl-24 md:pl-32 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60">
               Driver:&nbsp;
               <Link href={`/drivers/${driver.Driver.driverId}`}>
