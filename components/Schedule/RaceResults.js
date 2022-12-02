@@ -295,7 +295,7 @@ const Race = ({race}) => {
       </div>
       {
         race.completed && (
-          <div className="flex max-w-screen-lg mx-auto px-6">
+          <div className="flex layout px-6">
             {
               filters.map((item, i) => (
                 <TabButton
@@ -311,7 +311,7 @@ const Race = ({race}) => {
         )
       }
     </div>
-      <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+      <div className="px-4 py-12 layout">
         {getTab(active)}
       </div>
     </>

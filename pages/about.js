@@ -35,7 +35,7 @@ const Page = () => {
           <h1 className="text-3xl md:text-5xl font-black">About</h1>
         </div>
       </div>
-      <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+      <div className="px-4 py-12 layout">
         <h4 className="font-bold my-4 text-lg">Race Times is a project to help fellow Formula 1 fans figure out the time for an upcoming grand prix in your local time.</h4>
         <p>Race Times is open-source and built using a few helpful tools:</p>
         <ul className="my-4 grid grid-cols-1 lg:grid-cols-2 gap-4">

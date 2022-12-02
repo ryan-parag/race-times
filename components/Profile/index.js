@@ -43,7 +43,7 @@ export const Driver = ({id}) => {
                 </div>
               </div>
             </div>
-            <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+            <div className="px-4 py-12 layout">
               <div className="rounded-md border border-gray-100 dark:border-gray-600">
                 <ListItem label="Status" border>
                   {
@@ -126,7 +126,7 @@ export const Team = ({id}) => {
               </div>
             </div>
            </div>
-            <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+            <div className="px-4 py-12 layout">
               <div className="rounded-md border border-gray-100 dark:border-gray-600">
                 <ListItem label="Status" border>
                   {

@@ -32,7 +32,7 @@ const Schedule = () => {
   return(
     <>
       <SeasonHeader selectSeason={fetchRaces} current={season}/>
-      <div className="px-4 py-12 w-full md:w-3/4 lg:w-1/2">
+      <div className="px-4 py-12 layout">
         {
           data ? (
             <>

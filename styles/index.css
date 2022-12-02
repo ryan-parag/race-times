@@ -12,4 +12,8 @@
   .link {
     @apply underline hover:dark:text-primary-200 focus:dark:text-primary-200 hover:text-primary-600 focus:text-primary-600 transition
   }
+
+  .layout {
+    @apply w-full max-w-screen-lg mx-auto
+  }
 }
