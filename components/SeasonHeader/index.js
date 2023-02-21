@@ -18,7 +18,7 @@ const SeasonPicker = ({ years, onChange, current }) => {
     <div className="relative z-10 w-auto">
       <Listbox value={selected.label} onChange={changeSeason}>
         <div className="relative">
-          <Listbox.Button className="w-full transition cursor-pointer pr-9 text-left hover:text-gray-500 dark:hover:text-gray-300">
+          <Listbox.Button className="w-full transition cursor-pointer hover:shadow hover:shadow-button pl-4 pr-9 text-left ">
             <strong>{selected.label}</strong>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronDown size={20}/>

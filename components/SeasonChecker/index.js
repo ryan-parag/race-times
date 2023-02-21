@@ -40,7 +40,7 @@ const SeasonChecker = ({ season }) => {
     <>
       {
         data && (
-          <div className="flex items-center py-5">
+          <div className={`flex items-center p-4 ${checkSeason(data.races) === 'completed' ? 'bg-green-500 border-green-500' : 'bg-gray-400 border-gray-400'} rounded-lg bg-opacity-10 border border-opacity-10 mb-4`}>
             <span className={`text-sm ${checkSeason(data.races) === 'completed' ? 'text-success-500 dark:text-success-200' : 'text-mono-black-60 dark:text-mono-white-60'}`}>{season} Season {checkSeason(data.races)}</span>
             {getIcon(checkSeason(data.races))}
           </div>

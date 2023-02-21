@@ -37,11 +37,11 @@ const Header = () => {
         </div>
         <div className={'w-full items-center justify-end flex flex-1'}>
           <Link href={'/about'}>
-            <a title={'About'} className="transition p-1 inline-flex items-center justify-center bg-white dark:bg-gray-900 hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-700 hover:scale-105 rounded-full mr-2">
+            <a title={'About'} className="button button-sm mr-2">
               <Info size={20}/>
             </a>
           </Link>
-          <a title={'Contribute'} href="https://github.com/ryan-parag/race-times" target="_blank" className="transition p-1 inline-flex items-center justify-center bg-white dark:bg-gray-900 hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-700 hover:scale-105 rounded-full">
+          <a title={'Contribute'} href="https://github.com/ryan-parag/race-times" target="_blank" className="button button-sm">
             <GitHub size={20}/>
           </a>
         </div>

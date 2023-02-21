@@ -47,7 +47,7 @@ const Event = ({ event }) => {
   return (
     <Link href={`/races/${formatDate(event.date).yearString}/${event.race}`}>
       <a
-        className={`py-4 pl-0 pr-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-gray-100 backdrop-blur bg-transparent md:bg-white md:bg-opacity-40 dark:md:bg-gray-900 dark:border-gray-700 dark:md:bg-opacity-40 flex items-start relative transition transform hover:scale-105 hover:shadow-lg`}
+        className={`py-4 pl-0 pr-0 md:px-4 mb-4 w-full md:shadow md:rounded-md border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-gray-100 backdrop-blur bg-transparent md:bg-white md:bg-opacity-40 dark:md:bg-gray-900 dark:border-gray-700 dark:md:bg-opacity-40 flex items-start relative transition transform md:hover:scale-105 md:hover:shadow-lg dark:hover:border-white hover:border-gray-400 md:hover:border-gray-100 md:dark:hover:border-gray-700`}
       >
         <div className="pr-4 w-32 hidden md:block">
           <CalendarItem

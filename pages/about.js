@@ -42,11 +42,11 @@ const Page = () => {
           {
             tools.map((item,i) => (
               <li>
-                <a className="shadow flex justify-between px-4 py-2 items-center rounded-md border border-gray-100 dark:border-gray-600 transition hover:bg-black hover:bg-opacity-5 dark:hover:bg-gray-800 hover:scale-105" href={item.link} target="_blank">
+                <a className="button flex button-block justify-between px-4 py-2 items-center" href={item.link} target="_blank">
                   <ExternalLink size={16}/>
                   <div className="flex flex-col flex-1 pl-4">
                     <strong>{item.name}</strong>
-                    <span className="text-xs lg:text-sm font-mono text-mono-black-60 dark:text-mono-white-60">{item.use}</span>
+                    <span className="text-xs lg:text-sm font-mono font-normal mt-1 text-mono-black-60 dark:text-mono-white-60">{item.use}</span>
                   </div>
                 </a>
               </li>
