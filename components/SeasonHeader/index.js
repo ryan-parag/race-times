@@ -18,7 +18,7 @@ const SeasonPicker = ({ years, onChange, current }) => {
     <div className="relative z-10 w-auto">
       <Listbox value={selected.label} onChange={changeSeason}>
         <div className="relative">
-          <Listbox.Button className="w-full transition cursor-pointer hover:shadow hover:shadow-button pl-4 pr-9 text-left ">
+          <Listbox.Button className="w-full transition cursor-pointer hover:text-gray-500 dark:hover:text-gray-200 pr-9 text-left ">
             <strong>{selected.label}</strong>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronDown size={20}/>
@@ -30,7 +30,7 @@ const SeasonPicker = ({ years, onChange, current }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white dark:bg-gray-800 p-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white dark:bg-gray-800 p-1 text-base shadow-lg ring-2 ring-black dark:ring-white dark:ring-opacity-5 ring-opacity-5 focus:outline-none sm:text-sm">
               {years.map((item, i) => (
                 <Listbox.Option
                   key={i}
@@ -120,7 +120,7 @@ const SeasonHeader = ({ selectSeason, current }) => {
   const router = useRouter()
 
   return(
-    <div className={`sticky top-12 z-20 w-full flex bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600`}>
+    <div className={`sticky top-12 z-20 w-full flex bg-white dark:bg-gray-900 border-b border-secondary shadow-md`}>
       <div className={`transition flex flex-col w-full mt-4 px-6 ${isVisible ? 'pt-4' : 'pt-8'} w-full max-w-screen-lg mx-auto`}>
         <div className="flex items-center">
           <h1 className={`transition font-bold text-inherit flex items-center ${isVisible ? 'text-xl' : 'text-3xl'}`}>
@@ -149,7 +149,7 @@ const SeasonHeader = ({ selectSeason, current }) => {
             </>
           )
         }
-        <div className={`transition flex w-full ${isVisible ? 'mt-4' : 'mt-8'}`}>
+        <div className={`relative top-px transition flex w-full ${isVisible ? 'mt-4' : 'mt-8'}`}>
           {
             navigation.map((item, i) => (
               <Tab

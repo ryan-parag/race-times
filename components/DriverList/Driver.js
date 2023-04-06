@@ -22,7 +22,7 @@ export const PlaceCell = ({ place }) => {
   }
 
   return(
-    <td className={`p-0 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
+    <td className={`p-0 border-b text-xs md:text-base border-secondary text-mono-black-60 dark:text-mono-white-60`}>
       <div className="h-12 w-1 rounded-tr-sm rounded-br-sm" style={{ background: getPlace(place) }}/>
     </td>
   )
@@ -31,7 +31,7 @@ export const PlaceCell = ({ place }) => {
 export const TableCell = ({place, children }) => {
 
   return(
-    <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
+    <td className={`p-2 border-b text-xs md:text-base border-secondary text-mono-black-60 dark:text-mono-white-60`}>
       {children}
     </td>
   )

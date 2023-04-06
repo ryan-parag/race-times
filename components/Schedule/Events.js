@@ -36,7 +36,9 @@ const Events = ({ data, season }) => {
     <>
       {
         completed ? (
-          <SeasonChecker season={season} />
+          <div className="px-4 md:px-0">
+            <SeasonChecker season={season} />
+          </div>
         )
         :
         (

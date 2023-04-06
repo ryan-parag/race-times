@@ -26,7 +26,7 @@ const Header = () => {
   },[season])
 
   return(
-    <div className="fixed border-b border-gray-100 dark:border-gray-700 w-full bg-white dark:bg-gray-900 z-50">
+    <div className="fixed border-b border-secondary w-full bg-white dark:bg-gray-900 z-50">
       <div className="px-6 py-4 layout items-center flex">
         <div className={'w-full flex-1 flex items-center justify-start'}>
           <Link href={'/'}>

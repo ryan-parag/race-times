@@ -1,6 +1,14 @@
 @tailwind components;
 
 @layer components {
+
+  html, body {
+    @apply w-full h-full
+  }
+  body {
+    @apply bg-gradient-to-tr from-gray-50 via-white to-white dark:from-black dark:via-gray-900 dark:to-gray-900 dark:text-white text-black
+  }
+  
   .shadow-button {
     --tw-shadow: var(--button-shadow);
     --tw-shadow-colored: var(--button-shadow);
@@ -30,7 +38,7 @@
   }
 
   .tag {
-    @apply rounded-full inline-flex items-center font-bold py-0.5
+    @apply rounded-lg inline-flex items-center font-semibold text-sm py-1 px-3
   }
 
   .select {
@@ -43,5 +51,13 @@
 
   .layout {
     @apply w-full max-w-screen-lg mx-auto
+  }
+
+  .border-secondary {
+    @apply border-black border-opacity-5 dark:border-white dark:border-opacity-5
+  }
+
+  .card {
+    @apply rounded-lg border border-secondary shadow bg-transparent dark:bg-gray-800 dark:bg-opacity-50 backdrop-blur-md;
   }
 }

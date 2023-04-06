@@ -3,7 +3,7 @@ import Tag from '@components/Tag'
 
 const Filters = ({options, active, change}) => {
   return(
-    <div className="py-5">
+    <div className="px-4 md:px-0 py-5">
       {
         options.map((item, i) => (
           <button className="bg-transparent p-0" key={i} onClick={() => change(item)}>

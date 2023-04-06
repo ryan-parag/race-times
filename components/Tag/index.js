@@ -43,7 +43,7 @@ const Tag = ({ghost, type, size, children, ml, mt, mb, mr}) => {
         return 'bg-transparent text-mono-black-60 border-transparent dark:text-mono-white-60 dark:bg-transparnt dark:border-transparent'
         break;
       default:
-        return 'text-black border-gray-200 bg-transparent dark:bg-transparent dark:text-white dark:border-gray-500'
+        return 'text-black bg-gray-100 bg-opacity-40 dark:bg-gray-600 dark:text-white'
     }
   }
 
@@ -62,7 +62,7 @@ const Tag = ({ghost, type, size, children, ml, mt, mb, mr}) => {
 
   return(
     <span
-      className={`tag mb-${mb ? mb : '0'} mt-${mt ? mt : '0'} mr-${mr ? mr : '0'} ml-${ml ? ml : '0'} ${getSize(size)} border ${ghost ? getGhost(type) : getType(type)}`}
+      className={`tag mb-${mb ? mb : '0'} mt-${mt ? mt : '0'} mr-${mr ? mr : '0'} ml-${ml ? ml : '0'} ${getSize(size)} ${ghost ? getGhost(type) : getType(type)}`}
     >
       {children}
     </span>

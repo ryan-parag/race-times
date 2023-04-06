@@ -241,7 +241,7 @@ const Race = ({race}) => {
         return (
           <div>
             <Schedule race={race}/>
-            <div className="rounded-md border border-gray-100 dark:border-gray-600">
+            <div className="card">
               <ListItem label="Circuit" border>
                 {race.track}
               </ListItem>
@@ -262,7 +262,7 @@ const Race = ({race}) => {
 
   return(
     <>
-    <div className="w-full sticky top-12 z-20 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600">
+    <div className="w-full sticky top-12 z-20 bg-white dark:bg-gray-900 border-b border-secondary shadow-md">
       <div className={`transition flex flex-col w-full px-6 ${isVisible ? 'pt-8 pb-4' : 'pt-8 pb-8'} w-full max-w-screen-lg mx-auto`}>
         <div className={`text-sm text-mono-black-60 dark:text-mono-white-60 mb-4 ${isVisible ? 'hidden': 'block'}`}>
           <Link href={'/schedule'}>
@@ -295,7 +295,7 @@ const Race = ({race}) => {
       </div>
       {
         race.completed && (
-          <div className="flex layout px-6">
+          <div className="flex layout px-6 relative top-px">
             {
               filters.map((item, i) => (
                 <TabButton

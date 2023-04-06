@@ -17,8 +17,8 @@ export const Driver = ({id}) => {
       {
         data ? (
           <>
-            <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600">
-              <div className="flex flex-col w-full px-6 py-12 w-full max-w-screen-lg mx-auto">
+            <div className="w-full bg-white dark:bg-gray-900 border-b border-secondary shadow-md">
+              <div className="flex flex-col px-6 py-12 w-full max-w-screen-lg mx-auto">
                 <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
                   <Link href={'/drivers'}>
                     <a className="hover:underline">Drivers</a>
@@ -44,7 +44,7 @@ export const Driver = ({id}) => {
               </div>
             </div>
             <div className="px-4 py-12 layout">
-              <div className="rounded-md border border-gray-100 dark:border-gray-600">
+              <div className="card">
                 <ListItem label="Status" border>
                   {
                     data.profile.active ? (
@@ -102,8 +102,8 @@ export const Team = ({id}) => {
       {
         data ? (
           <>
-           <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-600">
-            <div className="flex flex-col w-full px-6 py-12 w-full max-w-screen-lg mx-auto">
+           <div className="w-full bg-white dark:bg-gray-900 border-b border-secondary shadow-md">
+            <div className="flex flex-col w-full px-6 py-12 max-w-screen-lg mx-auto">
               <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
                 <Link href={'/teams'}>
                   <a className="hover:underline">Teams</a>
@@ -115,7 +115,7 @@ export const Team = ({id}) => {
                 <div className="inline-flex items-center">
                   <img
                     src={`/static/teams/${data.constructor.id}.png`}
-                    className="bg-white p-2 w-14 h-14 mr-4 overflow-hidden rounded-full"
+                    className="bg-white p-2 w-14 h-14 mr-4 overflow-hidden rounded-full ring-2 dark:ring-white dark:ring-opacity-10 ring-black ring-opacity-5"
                     onError={(e) => (e.currentTarget.src = '/static/teams/default.png')}
                   />
                   <h1 className="text-3xl md:text-5xl font-black">{data.constructor.name}</h1>
@@ -127,7 +127,7 @@ export const Team = ({id}) => {
             </div>
            </div>
             <div className="px-4 py-12 layout">
-              <div className="rounded-md border border-gray-100 dark:border-gray-600">
+              <div className="card">
                 <ListItem label="Status" border>
                   {
                     data.constructor.active ? (

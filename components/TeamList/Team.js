@@ -22,7 +22,7 @@ const PlaceCell = ({ place }) => {
   }
 
   return(
-    <td className={`p-0 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
+    <td className={`p-0 border-b text-xs md:text-base border-secondary text-mono-black-60 dark:text-mono-white-60`}>
       <div className="h-12 w-1 rounded-tr-sm rounded-br-sm" style={{ background: getPlace(place) }}/>
     </td>
   )
@@ -31,7 +31,7 @@ const PlaceCell = ({ place }) => {
 const TableCell = ({place, children }) => {
 
   return(
-    <td className={`p-2 border-b text-xs md:text-base border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60`}>
+    <td className={`p-2 border-b text-xs md:text-base border-secondary text-mono-black-60 dark:text-mono-white-60`}>
       {children}
     </td>
   )
@@ -58,7 +58,7 @@ const Team = ({data}) => {
             <Link href={`/teams/${data.id}`}>
               <a className="inline-flex items-center text-sm md:text-base font-bold text-black dark:text-white mr-1 link">
                 <img
-                  className="w-8 h-8 p-1 rounded-full bg-white overflow-hidden mr-2"
+                  className="w-8 h-8 p-1 rounded-full bg-white overflow-hidden mr-2 ring-1 ring-black ring-opacity-10 dark:ring-white dark:ring-opacity-10"
                   src={`/static/teams/${data.id}.png`}
                   onError={(e) => (e.currentTarget.src = '/static/teams/default.png')}
                 />
