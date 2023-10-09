@@ -30,20 +30,20 @@ const Header = () => {
       <div className="px-6 py-4 layout items-center flex">
         <div className={'w-full flex-1 flex items-center justify-start'}>
           <Link href={'/'}>
-            <a className="mr-2">
+            <span className="mr-2">
               <Logo type={'primary'} />
-            </a>
+            </span>
           </Link>
         </div>
         <div className={'w-full items-center justify-end flex flex-1'}>
           <Link href={'/about'}>
-            <a title={'About'} className="button button-sm mr-2">
+            <span title={'About'} className="button button-sm mr-2">
               <Info size={20}/>
-            </a>
+            </span>
           </Link>
-          <a title={'Contribute'} href="https://github.com/ryan-parag/race-times" target="_blank" className="button button-sm">
+          <span title={'Contribute'} href="https://github.com/ryan-parag/race-times" target="_blank" className="button button-sm">
             <GitHub size={20}/>
-          </a>
+          </span>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ import ListItem from '@components/ListItem'
 import { PlaceCell, TableCell } from '@components/DriverList/Driver'
 import { TableHeader } from '@components/DriverList/Drivers'
 import Crown from '@components/Crown'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion';
 import Flag from '@components/Flag'
 import { TabButton } from '@components/Tab'
 
@@ -24,12 +24,19 @@ const Driver = ({driver}) => {
   return(
     <>
       <motion.tr
-        className="opacity-0"
+        className={`transition opacity-0 ${open ? 'bg-gray-50 dark:bg-gray-800' : 'hover:bg-gray-50 dark:hover:bg-gray-800 bg-transparent'}`}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.12, delay: 0.05*driver.position }}
         key={driver.position}
+        role="button"
+        onClick={() => setOpen(!open)}
       >
         <PlaceCell place={driver.position}/>
+        <TableCell place={driver.position}>
+          <button className="p-1 rounded-md" onClick={() => setOpen(!open)}>
+            <ChevronDown size="20" className={`transform transition ${open ? 'rotate-0' : '-rotate-90'}`} />
+          </button>
+        </TableCell>
         <TableCell place={driver.position}>
           {
             driver.position === '1' || driver.position === '2' || driver.position === '3' ? (
@@ -45,55 +52,59 @@ const Driver = ({driver}) => {
           <div className="flex flex-col">
             <div className="flex items-center">
               <Link href={`/drivers/${driver.Driver.driverId}`}>
-                <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 link">{driver.Driver.code}</a>
+                <span className="text-sm md:text-base font-medium text-black dark:text-white mr-1 link">{driver.Driver.code}</span>
               </Link>
-              <div className="w-5">
+              <div className="w-5 mx-2">
                 <Flag nation={driver.Driver.nationality}/>
               </div>
-            </div>
-            <div className="flex items-center">
-              <Link href={`/teams/${driver.Constructor.constructorId}`}>
-                <a className="text-xs mr-1 link">{driver.Constructor.name}</a>
-              </Link>
-              <span className="text-xs mr-1">•</span>
               <span className="text-xs">#{driver.Driver.permanentNumber}</span>
             </div>
           </div>
         </TableCell>
+        <TableCell place={driver.position}>
+          <Link href={`/teams/${driver.Constructor.constructorId}`}>
+            <span className="text-xs mr-1 link">{driver.Constructor.name}</span>
+          </Link>
+        </TableCell>
         <TableCell place={driver.position}>{driver.points}</TableCell>
         <TableCell place={driver.position}>{driver.Time ? driver.Time.time : '-'}</TableCell>
-        <TableCell place={driver.position}>
-          <button className="p-1 rounded-md" onClick={() => setOpen(!open)}>
-            <ChevronDown size="20" className={`transform transition ${open ? 'rotate-180' : 'rotate-0'}`} />
-          </button>
-        </TableCell>
       </motion.tr>
-      {
-        open && (
-          <tr>
-          <td colSpan="100%">
-            <div className="p-2 pl-24 md:pl-32 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60">
-              Driver:&nbsp;
-              <Link href={`/drivers/${driver.Driver.driverId}`}>
-                <a className="font-bold text-black dark:text-white link">
-                  {driver.Driver.givenName} {driver.Driver.familyName}
-                </a>
-              </Link>
-            </div>
-            <div className="p-2 pl-24 md:pl-32 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60">
-              Laps: {driver.laps ? driver.laps : '-'} ({driver.status})
-            </div>
-            {
-              driver.FastestLap && (
-                <div className="p-2 pl-24 md:pl-32 border-b text-xs md:text-sm bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-600 text-mono-black-60 dark:text-mono-white-60">
-                  Fastest Lap: {driver.FastestLap.Time.time} • Avg {driver.FastestLap.AverageSpeed.speed} {driver.FastestLap.AverageSpeed.units}
-                </div>
-              )
-            }
-          </td>
-        </tr>
-        )
-      }
+      <AnimatePresence>
+        {
+          open && (
+            <tr>
+              <td colSpan="100%">
+                <motion.div
+                  className="transition p-4 pl-12 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 text-mono-black-60 dark:text-mono-white-60 grid grid-cols-1 gap-3 overflow-y-hidden"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.1, delay: 0 }}
+                >
+                  <span>
+                    Driver:&nbsp;
+                    <Link href={`/drivers/${driver.Driver.driverId}`}>
+                      <span className="font-medium text-black dark:text-white link">
+                        {driver.Driver.givenName} {driver.Driver.familyName}
+                      </span>
+                    </Link>
+                  </span>
+                  <span>
+                    Laps: {driver.laps ? driver.laps : '-'} ({driver.status})
+                  </span>
+                  {
+                    driver.FastestLap && (
+                      <span>
+                        Fastest Lap: {driver.FastestLap.Time.time} • Avg {driver.FastestLap.AverageSpeed.speed} {driver.FastestLap.AverageSpeed.units}
+                      </span>
+                    )
+                  }
+                </motion.div>
+              </td>
+            </tr>
+          )
+        }
+      </AnimatePresence>
     </>
   )
 }
@@ -178,11 +189,12 @@ const Results = ({race}) => {
       <thead>
         <tr>
           <TableHeader/>
+          <TableHeader/>
           <TableHeader>Place</TableHeader>
           <TableHeader>Driver</TableHeader>
+          <TableHeader>Team</TableHeader>
           <TableHeader>Points</TableHeader>
           <TableHeader>Time</TableHeader>
-          <TableHeader/>
         </tr>
       </thead>
       <tbody>
@@ -222,7 +234,7 @@ const Race = ({race}) => {
     }
   };
 
-  const filters = null
+  let filters = null
 
   if(race.completed) {
     filters = ['Results', 'Info']
@@ -264,9 +276,9 @@ const Race = ({race}) => {
     <>
     <div className="w-full sticky top-12 z-20 bg-white dark:bg-gray-900 border-b border-secondary shadow-md">
       <div className={`transition flex flex-col w-full px-6 ${isVisible ? 'pt-8 pb-4' : 'pt-8 pb-8'} w-full max-w-screen-lg mx-auto`}>
-        <div className={`text-sm text-mono-black-60 dark:text-mono-white-60 mb-4 ${isVisible ? 'hidden': 'block'}`}>
+        <div className={`text-sm text-mono-black-60 inline-flex items-center tracking-wider dark:text-mono-white-60 mb-6 ${isVisible ? 'hidden': 'block'}`}>
           <Link href={'/schedule'}>
-            <a className="hover:underline">Schedule</a>
+            <span className="hover:underline">Schedule</span>
           </Link>
           <span className="mx-1">/</span>
           <span className="font-bold text-black dark:text-white">{race.name}</span>
@@ -277,9 +289,9 @@ const Race = ({race}) => {
               {
                 isVisible && (
                   <Link href={'/schedule'}>
-                    <a className="mr-2">
+                    <span className="mr-2 inline-flex items-center">
                       <ArrowLeft size={24}/>
-                    </a>
+                    </span>
                   </Link>
                 )
               }
@@ -336,7 +348,7 @@ const RaceResults = ({race, season}) => {
                 <Empty>
                   <h4 className="font-bold text-2xl">Race Not Schedule</h4>
                   <Link href="/schedule">
-                    <a className="link">Back to Schedule</a>
+                    <span className="link">Back to Schedule</span>
                   </Link>
                 </Empty>
               )

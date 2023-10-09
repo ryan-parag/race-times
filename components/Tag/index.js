@@ -130,11 +130,11 @@ export const TagLink = ({ghost, type, size, children, ml, mt, mb, mr, href}) => 
 
   return(
     <Link href={href}>
-      <a
+      <span
         className={`tag mb-${mb ? mb : '0'} mt-${mt ? mt : '0'} mr-${mr ? mr : '0'} ml-${ml ? ml : '0'} ${getSize(size)} border ${ghost ? getGhost(type) : getType(type)}`}
       >
         {children}
-      </a>
+      </span>
     </Link>
   )
 }

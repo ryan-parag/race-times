@@ -21,6 +21,7 @@ const Drivers = ({ data }) => {
             <TableHeader/>
             <TableHeader>Rank</TableHeader>
             <TableHeader>Driver</TableHeader>
+            <TableHeader>Team</TableHeader>
             <TableHeader>Wins</TableHeader>
             <TableHeader>Pts</TableHeader>
           </tr>

@@ -56,28 +56,29 @@ const Driver = ({data}) => {
         <div className="flex flex-col">
           <div className="flex items-center">
             <Link href={`/drivers/${data.id}`}>
-              <a className="text-sm md:text-base font-bold text-black dark:text-white mr-1 link">{data.firstName} {data.lastName}</a>
+              <span className="text-sm md:text-base font-medium text-black dark:text-white mr-1 link">{data.firstName} {data.lastName}</span>
             </Link>
-            <div className="w-5">
+            <div className="mx-2 w-5">
               <Flag nation={data.country}/>
             </div>
+            <span className="text-xs">#{data.number}</span>
           </div>
-          {
-            data.teams.length > 0 && (
-              <div className="flex items-center">
-                {
-                  data.teams.map((team, i) => (
-                    <Link href={`/teams/${team.id}`} key={i}>
-                      <a className="text-xs mr-1 link">{team.name}</a>
-                    </Link>
-                  ))
-                }
-                <span className="text-xs mr-1">•</span>
-                <span className="text-xs">#{data.number}</span>
-              </div>
-            )
-          }
         </div>
+      </TableCell>
+      <TableCell place={data.position}>
+        {
+          data.teams.length > 0 && (
+            <div className="flex items-center">
+              {
+                data.teams.map((team, i) => (
+                  <Link href={`/teams/${team.id}`} key={i}>
+                    <span className="text-xs mr-1 link">{team.name}</span>
+                  </Link>
+                ))
+              }
+            </div>
+          )
+        }
       </TableCell>
       <TableCell place={data.position}>{data.wins}</TableCell>
       <TableCell place={data.position}>{data.points}</TableCell>
