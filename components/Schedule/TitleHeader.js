@@ -70,9 +70,9 @@ const SeasonPicker = ({ years, onChange }) => {
 const Tab = ({ active, children, href }) => {
   return(
     <Link href={href}>
-      <a className={`py-3 transition text-sm lg:text-base border-b-2 mr-6 ${active ? 'border-gray-900 text-gray-900 dark:text-white dark:border-white' : 'text-gray-400 border-transparent hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:hover:text-white dark:hover:border-white'}`}>
+      <div className={`py-3 transition text-sm lg:text-base border-b-2 mr-6 ${active ? 'border-gray-900 text-gray-900 dark:text-white dark:border-white' : 'text-gray-400 border-transparent hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:hover:text-white dark:hover:border-white'}`}>
         {children}
-      </a>
+      </div>
     </Link>
   )
 }
@@ -83,7 +83,7 @@ const TitleHeader = ({ selectSeason }) => {
 
   return(
     <div className={`w-full flex bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-30 border-b border-gray-100 dark:border-gray-600`}>
-      <div className="flex flex-col w-full mt-4 px-6 pt-8 w-full max-w-screen-lg mx-auto">
+      <div className="flex flex-col w-full mt-4 px-6 pt-8 max-w-screen-lg mx-auto">
         <div className="flex items-center">
           <h1 className="text-3xl font-bold text-inherit flex items-center">
             <span>F1 Season</span>
@@ -98,7 +98,7 @@ const TitleHeader = ({ selectSeason }) => {
         {
           data && (
             <>
-              <div className="inline-flex items-center hidden">
+              <div className="inline-flex items-center">
                 <label className="text-sm inline-block mr-2 text-mono-black-60 dark:text-mono-white-60">Season:</label>
                 <select className="select" onChange={selectSeason}>
                   {

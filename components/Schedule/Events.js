@@ -45,26 +45,28 @@ const Events = ({ data, season }) => {
           <Filters options={upcomingFilters} active={active} change={setActive}/>
         )
       }
-      {
-        filtered.length > 0 ? (
-          filtered.map((item,i ) => (
-            <motion.div
-              className="opacity-0 top-4 relative"
-              animate={{ opacity: 1, top: 0 }}
-              transition={{ duration: 0.3, delay: 0.1*i }}
-              key={i}
-            >
-              <Event key={item.race} event={item}/>
-            </motion.div>
-          ))
-        )
-        :
-        (
-          <Empty>
-            <span className="text-sm">There are no {active.toLowerCase()} events for the {season} season</span>
-          </Empty>
-        )
-      }
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          filtered.length > 0 ? (
+            filtered.map((item,i ) => (
+              <motion.div
+                className="opacity-0 top-4 relative"
+                animate={{ opacity: 1, top: 0 }}
+                transition={{ duration: 0.3, delay: 0.1*i }}
+                key={i}
+              >
+                <Event key={item.race} event={item}/>
+              </motion.div>
+            ))
+          )
+          :
+          (
+            <Empty>
+              <span className="text-sm">There are no {active.toLowerCase()} events for the {season} season</span>
+            </Empty>
+          )
+        }
+      </div>
     </>
   )
 }

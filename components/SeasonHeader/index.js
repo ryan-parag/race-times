@@ -70,9 +70,9 @@ const SeasonPicker = ({ years, onChange, current }) => {
 const Tab = ({ active, children, href }) => {
   return(
     <Link href={href}>
-      <a className={`py-3 transition text-sm lg:text-base border-b-2 mr-6 ${active ? 'border-gray-900 text-gray-900 dark:text-white dark:border-white' : 'text-gray-400 border-transparent hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:hover:text-white dark:hover:border-white'}`}>
+      <span className={`py-3 transition text-sm lg:text-base border-b-2 mr-6 ${active ? 'border-gray-900 text-gray-900 dark:text-white dark:border-white' : 'text-gray-400 border-transparent hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:hover:text-white dark:hover:border-white'}`}>
         {children}
-      </a>
+      </span>
     </Link>
   )
 }
@@ -121,7 +121,7 @@ const SeasonHeader = ({ selectSeason, current }) => {
 
   return(
     <div className={`sticky top-12 z-20 w-full flex bg-white dark:bg-gray-900 border-b border-secondary shadow-md`}>
-      <div className={`transition flex flex-col w-full mt-4 px-6 ${isVisible ? 'pt-4' : 'pt-8'} w-full max-w-screen-lg mx-auto`}>
+      <div className={`transition flex flex-col w-full mt-4 px-6 pb-3 ${isVisible ? 'pt-4' : 'pt-8'} w-full max-w-screen-lg mx-auto`}>
         <div className="flex items-center">
           <h1 className={`transition font-bold text-inherit flex items-center ${isVisible ? 'text-xl' : 'text-3xl'}`}>
             <span>F1 Season</span>

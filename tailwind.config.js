@@ -5,7 +5,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Switzer-Variable', 'sans-serif'],
+      sans: ['Formula', 'sans-serif'],
+      title: ['Formula Narrow', 'sans-serif'],
+      mono: ['Neutral Mono', 'sans-serif'],
     },
     extend: {
       colors: {

@@ -21,7 +21,7 @@ export const Driver = ({id}) => {
               <div className="flex flex-col px-6 py-12 w-full max-w-screen-lg mx-auto">
                 <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
                   <Link href={'/drivers'}>
-                    <a className="hover:underline">Drivers</a>
+                    <span className="hover:underline">Drivers</span>
                   </Link>
                   <span className="mx-1">/</span>
                   <span className="font-bold text-black dark:text-white">{data.profile.firstName} {data.profile.lastName}</span>
@@ -63,7 +63,7 @@ export const Driver = ({id}) => {
                         {
                           data.profile.active.Constructors.map(team => (
                             <Link href={`/teams/${team.constructorId}`}>
-                              <a className="link">{team.name}</a>
+                              <span className="link">{team.name}</span>
                             </Link>
                           ))
                         }
@@ -106,7 +106,7 @@ export const Team = ({id}) => {
             <div className="flex flex-col w-full px-6 py-12 max-w-screen-lg mx-auto">
               <div className="text-sm text-mono-black-60 dark:text-mono-white-60 mb-4">
                 <Link href={'/teams'}>
-                  <a className="hover:underline">Teams</a>
+                  <span className="hover:underline">Teams</span>
                 </Link>
                 <span className="mx-1">/</span>
                 <span className="font-bold text-black dark:text-white">{data.constructor.name}</span>
@@ -150,7 +150,7 @@ export const Team = ({id}) => {
                           data.constructor.drivers.map((driver, i) => (
                             <span>
                               <Link key={driver.id} href={`/drivers/${driver.id}`}>
-                                <a className="link">{driver.firstName} {driver.lastName}</a>
+                                <span className="link">{driver.firstName} {driver.lastName}</span>
                               </Link>
                               {
                                 i !== data.constructor.drivers.length - 1 && (<span className="mx-1">,</span>)

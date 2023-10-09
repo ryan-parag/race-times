@@ -10,17 +10,17 @@ export const MobileNavItem = ({ label, route }) => {
   if(router.pathname === route) {
     return(
       <Link href={route}>
-        <a className={'px-6 py-4 w-full bg-primary-100 dark:bg-primary-800 text-primary-700 dark:text-primary-100'}>
+        <span className={'px-6 py-4 w-full bg-primary-100 dark:bg-primary-800 text-primary-700 dark:text-primary-100'}>
           {label}
-        </a>
+        </span>
       </Link>
     )
   } else {
     return(
       <Link href={route}>
-        <a className={'px-6 py-4 w-full hover:bg-gray-0 hover:dark:bg-gray-800 transition'}>
+        <span className={'px-6 py-4 w-full hover:bg-gray-0 hover:dark:bg-gray-800 transition'}>
           {label}
-        </a>
+        </span>
       </Link>
     )
   }

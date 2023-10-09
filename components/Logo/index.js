@@ -14,7 +14,7 @@ const Logo = ({ type }) => {
   return(
     <div className={'inline-flex items-center'}>
       <LogoIcon type={type} />
-      <span className="pl-2 text-lg font-black">Race Times</span>
+      <span className="pl-2 text-base font-semibold uppercase tracking-widest">Race Times</span>
     </div>
   )
 }

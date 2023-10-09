@@ -46,8 +46,8 @@ const Event = ({ event }) => {
 
   return (
     <Link href={`/races/${formatDate(event.date).yearString}/${event.race}`}>
-      <a
-        className={`py-4 px-4 mb-4 w-full md:shadow md:rounded-lg border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-secondary backdrop-blur bg-transparent md:bg-white md:bg-opacity-40 dark:md:bg-gray-800 dark:md:bg-opacity-40 flex items-start relative transition transform md:hover:scale-105 md:hover:shadow-lg dark:hover:border-white hover:border-gray-400 md:hover:border-secondary`}
+      <span
+        className={`py-4 px-4 w-full md:shadow md:rounded-lg border-b md:border ${event.completed ? 'opacity-60' : 'opacity-100'} border-secondary backdrop-blur bg-transparent md:bg-white md:bg-opacity-40 dark:md:bg-gray-800 dark:md:bg-opacity-40 flex items-start relative transition transform md:hover:scale-105 md:hover:shadow-lg dark:hover:border-white hover:border-gray-400 md:hover:border-secondary`}
       >
         <div className="pr-4 w-32 hidden md:block">
           <CalendarItem
@@ -83,7 +83,7 @@ const Event = ({ event }) => {
             }
           </div>
         </div>
-      </a>
+      </span>
     </Link>
   )
 }
